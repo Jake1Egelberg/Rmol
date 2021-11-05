@@ -8,3 +8,5 @@ TO USE:
 4. Open Parms.txt and select parameters
 5. Run IMG.bat
 
+style.value can be: "cartoon", "sphere", "surface", or "stick"
+

@@ -16,6 +16,9 @@ pdb.value<-trimws(parms[which(parms$RMOL.PARMS=="pdb.value"),]$VALUE, which=c("b
 #Set style (cartoon, sphere, surface, stick)
 style.value<-trimws(parms[which(parms$RMOL.PARMS=="style.value"),]$VALUE, which=c("both"))
 
+#Set style (cartoon, sphere, surface, stick)
+color.scheme<-trimws(parms[which(parms$RMOL.PARMS=="color.scheme"),]$VALUE, which=c("both"))
+
 #Amino acids
 aspglu<-c("ASP","GLU")
 cysmet<-c("CYS","MET")
@@ -48,6 +51,7 @@ colors<-c("Bright Red","Bright Red",
 amino.scheme<-data.frame(Residue=amino.acids,
                          Color=colors)
 
+if(color.scheme=="amino"){
 #Uses amino color scheme
 if(style.value=="cartoon"){
     m_add_model(id=r3dmol(backgroundColor="white", cartoonQuality=10), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
@@ -86,4 +90,31 @@ if(style.value=="cartoon"){
     m_zoom_to() %>%
     saveWidget(file="IMG.html")
 }
+#END AMINO COLOR SCHEME
+} else if(color.scheme=="chain"){
+#Uses chain color scheme
 
+  if(style.value=="cartoon"){
+    print("Unable to color by chain in cartoon scheme")
+} else if(style.value=="sphere"){
+  m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
+    m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="chain")) %>%
+    m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
+    m_zoom_to() %>%
+    saveWidget(file="IMG.html")
+} else if(style.value=="surface"){
+  m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
+    m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="chain")) %>%
+    m_add_surface(atomsel=m_sel(resn=amino.acids),style=m_style_surface(opacity=0.9,colorScheme="chain")) %>%
+    m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
+    m_zoom_to() %>%
+    saveWidget(file="IMG.html")
+} else if(style.value=="stick"){
+  m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
+    m_set_style(sel=m_sel(resn=amino.acids),style=m_style_stick(colorScheme="chain")) %>%
+    m_zoom_to() %>%
+    saveWidget(file="IMG.html")
+}
+
+#END CHAIN COLOR SCHEME
+}

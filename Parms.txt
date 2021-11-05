@@ -1,6 +1,9 @@
 RMOL PARMS: VALUE
 
-pdb.value: 3ron
+pdb.value: 1SC5
 
-style.value: sphere
+style.value: surface
+
+color.scheme: amino
+
 

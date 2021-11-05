@@ -9,4 +9,5 @@ TO USE:
 5. Run IMG.bat
 
 style.value can be: "cartoon", "sphere", "surface", or "stick"
-
+color.scheme can be: "amino", or "chain"
+  *The chain color scheme is incompatible with the "cartoon" style

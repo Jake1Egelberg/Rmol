@@ -1,0 +1,6 @@
+RMOL PARMS: VALUE
+
+pdb.value: 3ron
+
+style.value: surface
+

@@ -1,10 +1,12 @@
-tryCatch(find.package(c("r3dmol","this.path","shiny")),
-         error=function(e) install.packages(c("r3dmol","this.path","shiny"),repos="http://lib.stat.cmu.edu/R/CRAN/"))
+tryCatch(find.package(c("r3dmol","this.path","shiny","htmlwidgets")),
+         error=function(e) install.packages(c("r3dmol","this.path","shiny","htmlwidgets"),repos="http://lib.stat.cmu.edu/R/CRAN/"))
 library(r3dmol)
 library(this.path)
 library(shiny)
+library(htmlwidgets)
 
 file.dir<-this.dir()
+setwd(file.dir)
 
 parms<-read.delim(paste(file.dir,"/Parms.txt",sep=""),sep=":")
 
@@ -63,20 +65,25 @@ if(style.value=="cartoon"){
       m_set_style(sel=m_sel(resn=pro),style=m_style_cartoon(color="#DC9682",arrows=FALSE)) %>%
       m_set_style(sel=m_sel(resn=lysarg),style=m_style_cartoon(color="#BEA06E,arrows=FALSE")) %>%
       m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
-      m_zoom_to()
+      m_zoom_to() %>%
+    saveWidget(file="IMG.html")
 } else if(style.value=="sphere"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="amino")) %>%
     m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
-    m_zoom_to()
+    m_zoom_to() %>%
+    saveWidget(file="IMG.html")
 } else if(style.value=="surface"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="amino")) %>%
     m_add_surface(atomsel=m_sel(resn=amino.acids),style=m_style_surface(opacity=0.9,colorScheme="amino")) %>%
     m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
-    m_zoom_to()
+    m_zoom_to() %>%
+    saveWidget(file="IMG.html")
 } else if(style.value=="stick"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_stick(colorScheme="amino")) %>%
-    m_zoom_to()
+    m_zoom_to() %>%
+    saveWidget(file="IMG.html")
 }
+

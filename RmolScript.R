@@ -70,25 +70,25 @@ if(style.value=="cartoon"){
       m_set_style(sel=m_sel(resn=lysarg),style=m_style_cartoon(color="#BEA06E,arrows=FALSE")) %>%
       m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
       m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 } else if(style.value=="sphere"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="amino")) %>%
     m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
     m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 } else if(style.value=="surface"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="amino")) %>%
     m_add_surface(atomsel=m_sel(resn=amino.acids),style=m_style_surface(opacity=0.9,colorScheme="amino")) %>%
     m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
     m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 } else if(style.value=="stick"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_stick(colorScheme="amino")) %>%
     m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 }
 #END AMINO COLOR SCHEME
 } else if(color.scheme=="chain"){
@@ -101,19 +101,19 @@ if(style.value=="cartoon"){
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="chain")) %>%
     m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
     m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 } else if(style.value=="surface"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_sphere(colorScheme="chain")) %>%
     m_add_surface(atomsel=m_sel(resn=amino.acids),style=m_style_surface(opacity=0.9,colorScheme="chain")) %>%
     m_set_style(sel=m_sel(resn=amino.acids,invert=TRUE),style=m_style_stick()) %>%
     m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 } else if(style.value=="stick"){
   m_add_model(id=r3dmol(backgroundColor="white"), data = m_fetch_pdb(pdb.value, save.pdb = FALSE), format = "pdb") %>%
     m_set_style(sel=m_sel(resn=amino.acids),style=m_style_stick(colorScheme="chain")) %>%
     m_zoom_to() %>%
-    saveWidget(file="IMG.html")
+    saveWidget(file="IMG.html",selfcontained=FALSE)
 }
 
 #END CHAIN COLOR SCHEME
